@@ -11,7 +11,8 @@ namespace ExampleWebApp
         static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddSingleton<IAuthService, AuthService>();
+
+            builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddControllers();
 
             // Configuração do JWT
