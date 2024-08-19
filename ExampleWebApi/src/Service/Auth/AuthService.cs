@@ -11,6 +11,13 @@ namespace Auth.Service
 {
     public class AuthService : IAuthService
     {
+        private readonly ILogger<AuthService> _logger;
+
+        public AuthService(ILogger<AuthService> logger, IUserRepository userRepository)
+        {
+            _logger = logger;
+        }
+
         public string Login(UserLoginModel user)
         {
             // call repository to verify
