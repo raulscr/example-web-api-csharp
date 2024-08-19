@@ -7,23 +7,33 @@ using System.Text;
 using Auth.Service.Model;
 using Auth.Service.Exceptions;
 
+using User.Repository;
+
 namespace Auth.Service
 {
     public class AuthService : IAuthService
     {
         private readonly ILogger<AuthService> _logger;
+        private IUserRepository _userRepository;
 
         public AuthService(ILogger<AuthService> logger, IUserRepository userRepository)
         {
             _logger = logger;
+            _userRepository = userRepository;
         }
 
         public string Login(UserLoginModel user)
         {
-            // call repository to verify
-            if (user.Login != "admin" || user.Password != "123456")
+            // try to find the user by userName
+            var registredUser = _userRepository.GetUserByName(user.Login).Result;
+            if (registredUser == null)
             {
-                throw new AuthenticationFailedServiceException("User or Password incorrect");
+                throw new AuthenticationFailedServiceException("User not found");
+            }
+
+            if (user.Password != registredUser.Password)
+            {
+                throw new AuthenticationFailedServiceException("Password incorrect");
             }
             return GenerateJwtToken(user.Login);
         }
