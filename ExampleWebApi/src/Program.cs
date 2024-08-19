@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
 using System.Text;
 
 using Auth.Service;
+using User.Repository;
+using User.Repository.DatabaseContext;
 
 namespace ExampleWebApp
 {
@@ -12,6 +15,12 @@ namespace ExampleWebApp
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddDbContext<UserContext>(options =>
+            {
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddControllers();
 
