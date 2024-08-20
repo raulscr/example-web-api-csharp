@@ -21,7 +21,7 @@ namespace Auth.Controller
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] UserLoginModel userLogin)
+        public IActionResult Login([FromBody] UserLoginRequest userLogin)
         {
             try
             {

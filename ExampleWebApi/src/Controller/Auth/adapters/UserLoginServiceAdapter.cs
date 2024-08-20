@@ -2,9 +2,9 @@ namespace Auth.Controller.Model
 {
     class UserLoginServiceAdapter : Service.Model.UserLoginModel
     {
-        private readonly UserLoginModel _adaptee;
+        private readonly UserLoginRequest _adaptee;
 
-        public UserLoginServiceAdapter(UserLoginModel adaptee)
+        public UserLoginServiceAdapter(UserLoginRequest adaptee)
         {
             this._adaptee = adaptee;
             this.Login = _adaptee.Login;
