@@ -12,5 +12,12 @@ namespace User.Repository.DatabaseContext
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserEntity>()
+                .HasIndex(u => u.Login)
+                .IsUnique();
+        }
     }
 }
