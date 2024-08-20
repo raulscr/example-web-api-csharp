@@ -5,16 +5,10 @@ using User.Repository.Model;
 
 namespace User.Repository
 {
-    public class UserRepository : DbContext, IUserRepository
+    public class UserRepository(ILogger<UserRepository> logger, UserContext context) : IUserRepository
     {
-        private ILogger<UserRepository> _logger;
-        private UserContext _context;
-
-        public UserRepository(ILogger<UserRepository> logger, UserContext context)
-        {
-            _logger = logger;
-            _context = context;
-        }
+        private ILogger<UserRepository> _logger = logger;
+        private UserContext _context = context;
 
         public async Task<UserEntity?> GetUserByName(string userName)
         {

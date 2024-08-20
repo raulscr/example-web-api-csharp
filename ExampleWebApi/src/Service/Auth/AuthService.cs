@@ -11,16 +11,10 @@ using User.Repository;
 
 namespace Auth.Service
 {
-    public class AuthService : IAuthService
+    public class AuthService(ILogger<AuthService> logger, IUserRepository userRepository) : IAuthService
     {
-        private readonly ILogger<AuthService> _logger;
-        private IUserRepository _userRepository;
-
-        public AuthService(ILogger<AuthService> logger, IUserRepository userRepository)
-        {
-            _logger = logger;
-            _userRepository = userRepository;
-        }
+        private readonly ILogger<AuthService> _logger = logger;
+        private IUserRepository _userRepository = userRepository;
 
         public string Login(UserLoginModel user)
         {

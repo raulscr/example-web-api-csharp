@@ -8,17 +8,10 @@ namespace Auth.Controller
 {
     [ApiController]
     [Route("[controller]")]
-    public class AuthController : ControllerBase
+    public class AuthController(ILogger<AuthController> logger, IAuthService service) : ControllerBase
     {
-
-        private readonly ILogger<AuthController> _logger;
-        private IAuthService _service;
-
-        public AuthController(ILogger<AuthController> logger, IAuthService service)
-        {
-            _logger = logger;
-            _service = service;
-        }
+        private readonly ILogger<AuthController> _logger = logger;
+        private IAuthService _service = service;
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] UserLoginRequest userLogin)
