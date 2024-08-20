@@ -6,9 +6,9 @@ namespace User.Repository.DatabaseContext
 {
     public class UserContext : DbContext
     {
-        public DbSet<UserLoginModel> Users { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
 
-        public UserContext(DbContextOptions<UserContext> options) 
+        public UserContext(DbContextOptions<UserContext> options)
             : base(options)
         {
         }

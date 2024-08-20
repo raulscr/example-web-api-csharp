@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace User.Repository.Model
 {
     [Table("users")]
-    public class UserLoginModel
+    public class UserEntity
     {
-        public UserLoginModel()
+        public UserEntity()
         {
             Login = "";
             Password = "";

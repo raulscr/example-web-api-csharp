@@ -10,13 +10,13 @@ namespace User.Repository
         private ILogger<UserRepository> _logger;
         private UserContext _context;
 
-        public UserRepository(ILogger<UserRepository> logger, UserContext context) 
+        public UserRepository(ILogger<UserRepository> logger, UserContext context)
         {
             _logger = logger;
             _context = context;
         }
 
-        public async Task<UserLoginModel?> GetUserByName(string userName)
+        public async Task<UserEntity?> GetUserByName(string userName)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Login == userName);
         }
