@@ -45,6 +45,12 @@ namespace ExampleWebApp
 
             var app = builder.Build();
 
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<UserContext>();
+                dbContext.Database.Migrate();
+            }
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
