@@ -14,14 +14,17 @@ namespace User.Repository.Model
 
         [Key]
         [Column("user_id")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; private set; }
 
         [Required]
         [Column("user_name")]
+        [MaxLength(255)]
         public string Login { get; set; }
 
         [Required]
         [Column("user_password")]
+        [MaxLength(255)]
         public string Password { get; set; }
     }
 }
