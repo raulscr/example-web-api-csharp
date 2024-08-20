@@ -1,15 +1,13 @@
+using System.Text.Json.Serialization;
 
 namespace Auth.Controller.Model
 {
-    public class UserLoginRequest
+    public class UserLoginRequest(string login = "", string password = "")
     {
-        public UserLoginRequest(string login = "", string password = "")
-        {
-            Login = login;
-            Password = password;
-        }
+        [JsonPropertyName("login")]
+        public string Login { get; set; } = login;
 
-        public string Login { get; set; }
-        public string Password { get; set; }
+        [JsonPropertyName("password")]
+        public string Password { get; set; } = password;
     }
 }
